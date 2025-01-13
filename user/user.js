@@ -211,10 +211,11 @@ function getCalendars() {
 }
 
 function updateCalendarSelectors(calendars, selected) {
-  // console.log("updateCalendarSelectors()")
+  console.log("updateCalendarSelectors()")
   calendars = calendars.sort((a,b) => { return a.summary - b.summary })
-  console.log(calendars);
+  // console.log(calendars);
   for(let cal of calendars) {
+    console.log(cal.summary);
     let opt = $("<option>")
     opt.text(cal.summary)
     opt.attr("value", cal.id)
@@ -473,6 +474,7 @@ async function requestCalendars() {
   try {
     const request = {
       'minAccessRole': 'writer',
+      'showHidden': true
     };
     response = await gapi.client.calendar.calendarList.list(request);
   } catch (err) {
